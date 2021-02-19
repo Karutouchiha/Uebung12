@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Phonebook {
@@ -9,14 +10,12 @@ public class Phonebook {
 
     public void setPhonebook(String name, String address, String phonenumber){
         phonebook.put(phonenumber,new String[]{name, address});
-        System.out.println(phonebook);
     }
     public void delete(String phonenumber){
         phonebook.remove(phonenumber);
-        System.out.println(phonebook);
     }
     public void save(){
-        try(FileWriter fw= new FileWriter(new File("Phone.csv"))){
+        try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){
             BufferedWriter bw = new BufferedWriter(fw);
             for (String key: phonebook.keySet()) {
                 String[] s = phonebook.get(key);
@@ -28,7 +27,20 @@ public class Phonebook {
             System.out.println(ex.getMessage());
         }
     }
-    public void load(){
+    public String[] load(){
+        String[] s = new String[3];
+        try {
+            Scanner scanner = new Scanner(new File("Phonebook.csv"));
+            scanner.useDelimiter(";");
+            for (int i=0;scanner.hasNext();i++){
+                s[i]=(scanner.next()+"\n");
+            }
 
+            scanner.close();
+        }
+        catch (IOException ex){
+            s[0]=ex.getMessage();
+        }
+        return s;
     }
 }

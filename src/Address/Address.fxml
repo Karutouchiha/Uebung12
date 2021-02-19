@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Address.ControllerAddress">
    <children>
-      <GridPane layoutX="200.0" layoutY="155.0">
+      <GridPane layoutX="135.0" layoutY="55.0" prefHeight="159.0" prefWidth="331.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -17,6 +23,33 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="121.294921875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse:" wrappingWidth="98.314453125" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:" wrappingWidth="117.2109375" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" />
+         </children>
       </GridPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ababab4b" height="64.0" layoutX="135.0" layoutY="241.0" stroke="BLACK" strokeType="INSIDE" width="331.0" />
+      <Polygon fill="#808080" layoutX="159.0" layoutY="266.0" points="10.0, 9.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fill="#808080" layoutX="337.0" layoutY="264.0" points="90.0, 10.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="289.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/1" />
+      <Button layoutX="111.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Add" />
+      <Button layoutX="249.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Change" />
+      <Button layoutX="387.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Delete" />
    </children>
 </Pane>

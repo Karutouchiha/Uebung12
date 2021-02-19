@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ControllerMain">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ababab4a" height="64.0" layoutX="135.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" width="331.0" />
       <Polygon fill="#808080" layoutX="159.0" layoutY="267.0" points="10.0, 9.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fill="#808080" layoutX="337.0" layoutY="265.0" points="90.0, 10.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="291.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/1" />
       <Button layoutX="135.0" layoutY="313.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Load Phonebook" />
-      <Button layoutX="348.0" layoutY="314.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Save Phonebook" />
+      <Button fx:id="save" layoutX="348.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#save" prefHeight="40.0" prefWidth="118.0" text="Save Phonebook" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ababab4a" height="47.0" layoutX="539.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <GridPane layoutX="135.0" layoutY="41.0" prefHeight="159.0" prefWidth="331.0">
          <columnConstraints>

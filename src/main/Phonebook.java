@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -27,20 +28,28 @@ public class Phonebook {
             System.out.println(ex.getMessage());
         }
     }
-    public String[] load(){
-        String[] s = new String[3];
+    public void load(){
+        ArrayList<String[]> arrayList = new ArrayList();
         try {
             Scanner scanner = new Scanner(new File("Phonebook.csv"));
             scanner.useDelimiter(";");
-            for (int i=0;scanner.hasNext();i++){
-                s[i]=(scanner.next()+"\n");
-            }
-
+            do{
+                String[] s = new String[3];
+                for (int i = 0; i<3&&scanner.hasNext(); i++) {
+                    s[i] = (scanner.next()+"\n");
+                }
+                scanner.nextLine();
+                arrayList.add(s);
+            }while (scanner.hasNext());
             scanner.close();
         }
         catch (IOException ex){
-            s[0]=ex.getMessage();
+            System.out.println(ex.getMessage());
         }
-        return s;
+        for (int i=0;i<arrayList.size();i++) {
+            String[] strings = arrayList.get(i);
+            setPhonebook(strings[1],strings[2],strings[0]);
+            System.out.println(phonebook.toString());
+        }
     }
 }

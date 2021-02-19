@@ -3,6 +3,8 @@ package main;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class ControllerMain {
     Phonebook ph = new Phonebook();
     @FXML private TextField phone;
@@ -13,15 +15,11 @@ public class ControllerMain {
     }
 
     public void save(){
-        ph.setPhonebook("adfs","afasdf","sadf");
-        ph.setPhonebook("asgd","asdg","safeva");
-        ph.delete("safeva");
+        ph.setPhonebook("Andreas","Wels 4600","+43 676 12345678");
+        ph.setPhonebook("Mathias","Attnang-P. 4800","+43 654 12351435");
         ph.save();
     }
     public void load(){
-        String[] strings =ph.load();
-        phone.setText(strings[0]);
-        name.setText(strings[1]);
-        address.setText(strings[2]);
+        ph.load();
     }
 }

@@ -6,8 +6,8 @@ import main.Phonebook;
 import java.io.IOException;
 
 public class ControllerAddress{
-
     main.Phonebook phonebook = new Phonebook();
+
     public void Phonebook(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/Mainscreen.fxml"));

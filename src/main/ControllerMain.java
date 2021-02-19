@@ -13,5 +13,6 @@ public class ControllerMain {
         ph.setPhonebook("adfs","afasdf","sadf");
         ph.setPhonebook("asgd","asdg","safeva");
         ph.delete("safeva");
+        ph.save();
     }
 }

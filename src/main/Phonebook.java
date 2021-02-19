@@ -10,5 +10,14 @@ public class Phonebook {
         phonebook.put(phonenumber,new String[]{name, address});
         System.out.println(phonebook);
     }
+    public void delete(String phonenumber){
+        phonebook.remove(phonenumber);
+        System.out.println(phonebook);
+    }
+    public void save(){
 
+    }
+    public void load(){
+
+    }
 }

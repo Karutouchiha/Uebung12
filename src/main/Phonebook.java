@@ -52,7 +52,7 @@ public class Phonebook {
         for (int i=0;i<arrayList.size();i++) {
             String[] strings = arrayList.get(i);
             setPhonebook(strings[1],strings[2],strings[0]);
-            System.out.println(phonebook.toString());
+            //System.out.println(phonebook.toString());
         }
     }
 }

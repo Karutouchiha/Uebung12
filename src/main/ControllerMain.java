@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ControllerMain implements Initializable {
     @FXML private TextField phone;
     @FXML private TextField name;
     @FXML private TextField address;
+    @FXML private Text value;
     public Phonebook getPhonebook() {
         return ph;
     }
@@ -49,7 +51,7 @@ public class ControllerMain implements Initializable {
                 index--;
             }
         }
-        System.out.println(index);
+        //System.out.println(index);
         update();
     }
     public void update(){
@@ -61,6 +63,7 @@ public class ControllerMain implements Initializable {
         phone.setText(al.get(index).toString());
         name.setText(s[0]);
         address.setText(s[1]);
+        value.setText((index+1)+"/"+al.size());
         }
         catch (IndexOutOfBoundsException ex){
             System.out.println("Es wurde kein Datensatz gefunden");

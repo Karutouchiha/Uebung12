@@ -49,7 +49,7 @@
       <Polygon fx:id="next" fill="#808080" layoutX="337.0" layoutY="264.0" onMouseClicked="#move" points="90.0, 10.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fx:id="value" layoutX="289.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/1" />
       <Button layoutX="111.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Add" />
-      <Button layoutX="249.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Change" />
+      <Button layoutX="249.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#change" prefHeight="35.0" prefWidth="98.0" text="Change" />
       <Button layoutX="387.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="35.0" prefWidth="98.0" text="Delete" />
    </children>
 </Pane>

@@ -17,6 +17,18 @@ public class Phonebook {
     public void delete(String phonenumber){
         phonebook.remove(phonenumber);
     }
+    public void change(String key, String addess, String name ,int index){
+        if (phonebook.containsKey(key)){
+            delete(key);
+        }
+        else {
+            ArrayList a = new ArrayList();
+            a.addAll(phonebook.keySet());
+            String s = a.get(index).toString();
+            delete(s);
+        }
+        setPhonebook(name,addess,key);
+    }
     public void save(){
         try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){
             BufferedWriter bw = new BufferedWriter(fw);
@@ -52,7 +64,6 @@ public class Phonebook {
         for (int i=0;i<arrayList.size();i++) {
             String[] strings = arrayList.get(i);
             setPhonebook(strings[1],strings[2],strings[0]);
-            //System.out.println(phonebook.toString());
         }
     }
 }

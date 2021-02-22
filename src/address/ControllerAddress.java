@@ -20,6 +20,11 @@ public class ControllerAddress {
     public void setPh(Phonebook ph) {
         this.ph = ph;
     }
+    public void change(){
+        ph.change(phone.getText(),address.getText(),name.getText(),index);
+        System.out.println(ph.getPhonebook().toString());
+        update();
+    }
 
     public void delete(){
         ph.delete(keyl.toArray()[index].toString());

@@ -1,5 +1,6 @@
 package main;
 
+import address.ControllerAddress;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +29,9 @@ public class ControllerMain implements Initializable {
     @FXML private Text value;
     public Phonebook getPhonebook() {
         return ph;
+    }
+    public void print(){
+        System.out.println(ph.getPhonebook());
     }
 
     public void save(){
@@ -58,7 +62,6 @@ public class ControllerMain implements Initializable {
                 index--;
             }
         }
-        //System.out.println(index);
         update();
     }
     public void update(){
@@ -74,6 +77,10 @@ public class ControllerMain implements Initializable {
         }
         catch (IndexOutOfBoundsException ex){
             System.out.println("Es wurde kein Datensatz gefunden");
+            phone.setText("");
+            name.setText("");
+            address.setText("");
+            value.setText("0/0");
             index=0;
         }
     }
@@ -81,11 +88,15 @@ public class ControllerMain implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/address/Address.fxml"));
             Parent root = loader.load();
+            ControllerAddress AC = loader.getController();
+            AC.setPh(this.ph);
+            AC.update();
             Stage stage = new Stage();
             stage.setTitle("Phonebook edit");
             stage.getIcons().add(new Image("https://s2.qwant.com/thumbr/0x380/c/e/17fc1f9bbfe37c9fb092530587faeb7b246672b67d6cf2b8be8a02d49f8e36/Address-Book-icon.png?u=http%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fartua%2Fmac%2F512%2FAddress-Book-icon.png&q=0&b=1&p=0&a=1"));
             stage.setScene(new Scene(root));
             stage.show();
+
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());

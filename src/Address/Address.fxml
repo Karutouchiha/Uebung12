@@ -39,15 +39,15 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" />
+            <TextField fx:id="phone" prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="address" prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="name" prefHeight="35.0" prefWidth="165.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ababab4b" height="64.0" layoutX="135.0" layoutY="241.0" stroke="BLACK" strokeType="INSIDE" width="331.0" />
-      <Polygon fill="#808080" layoutX="159.0" layoutY="266.0" points="10.0, 9.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
-      <Polygon fill="#808080" layoutX="337.0" layoutY="264.0" points="90.0, 10.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="289.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/1" />
+      <Polygon fx:id="back" fill="#808080" layoutX="159.0" layoutY="266.0" onMouseClicked="#move" points="10.0, 9.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="next" fill="#808080" layoutX="337.0" layoutY="264.0" onMouseClicked="#move" points="90.0, 10.0, 50.0, 25.0, 50.0, -5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="value" layoutX="289.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/1" />
       <Button layoutX="111.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Add" />
       <Button layoutX="249.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Change" />
       <Button layoutX="387.0" layoutY="320.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Delete" />

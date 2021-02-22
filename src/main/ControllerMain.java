@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import other.Phonebook;
 
 import java.io.IOException;
 import java.net.URL;
@@ -78,7 +79,7 @@ public class ControllerMain implements Initializable {
     }
     public void changeScene(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Address/Address.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/address/Address.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Phonebook edit");
@@ -101,5 +102,8 @@ public class ControllerMain implements Initializable {
         ph.setPhonebook("Patrick","Vöcklabruck. 4840","+43 654 15677441");
         ph.setPhonebook("Mathias","Attnang-P. 4800","+43 654 12555476");//*/
         update();
+        name.setEditable(false);
+        phone.setEditable(false);
+        address.setEditable(false);
     }
 }

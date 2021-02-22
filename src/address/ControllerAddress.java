@@ -1,4 +1,4 @@
-package Address;
+package address;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import main.ControllerMain;
-import main.Phonebook;
+import other.Phonebook;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,5 +79,6 @@ public class ControllerAddress implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Phonebook();
+        update();
     }
 }

@@ -6,9 +6,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Phonebook {
-
-
-    //name,Adresse,Phonenumber
     private TreeMap<String,String[]> phonebook = new TreeMap();
 
     public void setPhonebook(String name, String address, String phonenumber){
@@ -25,9 +22,10 @@ public class Phonebook {
             BufferedWriter bw = new BufferedWriter(fw);
             for (String key: phonebook.keySet()) {
                 String[] s = phonebook.get(key);
-                bw.write(key+";"+s[0]+";"+s[1]+"\n");
+                bw.write(key+";"+s[0]+";"+s[1]+";\n;");
             }
             bw.close();
+            System.out.println("Successfully saved");
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());
@@ -39,14 +37,14 @@ public class Phonebook {
             Scanner scanner = new Scanner(new File("Phonebook.csv"));
             scanner.useDelimiter(";");
             do{
-                String[] s = new String[3];
-                for (int i = 0; i<3&&scanner.hasNext(); i++) {
-                    s[i] = (scanner.next()+"\n");
+                String[] s = new String[4];
+                for (int i = 0; i<4&&scanner.hasNext(); i++) {
+                    s[i] = (scanner.next());
                 }
-                scanner.nextLine();
                 arrayList.add(s);
             }while (scanner.hasNext());
             scanner.close();
+            System.out.println("Successfully loaded");
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());

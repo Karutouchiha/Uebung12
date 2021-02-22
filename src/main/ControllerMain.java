@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -25,6 +26,8 @@ public class ControllerMain implements Initializable {
     }
     public void load(){
         ph.load();
+        update();
+        index=0;
     }
     public void move(MouseEvent event){
         Object node = event.getSource();
@@ -47,15 +50,32 @@ public class ControllerMain implements Initializable {
             }
         }
         System.out.println(index);
+        update();
+    }
+    public void update(){
+        try {
+        ArrayList al = new ArrayList();
+        al.addAll(ph.getPhonebook().keySet());
+
+        String[] s =ph.getPhonebook().get(al.toArray()[index]);
+        phone.setText(al.get(index).toString());
+        name.setText(s[0]);
+        address.setText(s[1]);
+        }
+        catch (IndexOutOfBoundsException ex){
+            System.out.println("Es wurde kein Datensatz gefunden");
+            index=0;
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ph.load();
+        ph.load();/*
         ph.setPhonebook("Andreas","Wels 4600","+43 676 12345678");
         ph.setPhonebook("Atonio","Attnang-P. 4800","+43 654 12351435");
         ph.setPhonebook("Lena","Attnang-P. 4800","+43 654 15675675");
-        ph.setPhonebook("Patrick","Vöcklabruck. 4840","+43 654 15677435");
-        ph.setPhonebook("Mathias","Attnang-P. 4800","+43 654 12555435");
+        ph.setPhonebook("Patrick","Vöcklabruck. 4840","+43 654 15677441");
+        ph.setPhonebook("Mathias","Attnang-P. 4800","+43 654 12555476");//*/
+        update();
     }
 }

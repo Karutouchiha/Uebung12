@@ -27,12 +27,6 @@ public class ControllerMain implements Initializable {
     @FXML private TextField name;
     @FXML private TextField address;
     @FXML private Text value;
-    public Phonebook getPhonebook() {
-        return ph;
-    }
-    public void print(){
-        System.out.println(ph.getPhonebook());
-    }
 
     public void save(){
         ph.save();

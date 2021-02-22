@@ -25,7 +25,9 @@ public class ControllerAddress {
         System.out.println(ph.getPhonebook().toString());
         update();
     }
-
+    public void add(){
+        ph.setPhonebook(name.getText(),address.getText(),phone.getText());
+    }
     public void delete(){
         ph.delete(keyl.toArray()[index].toString());
         System.out.println(ph.getPhonebook().toString());

@@ -6,11 +6,16 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Phonebook {
+
+
     //name,Adresse,Phonenumber
-    TreeMap<String,String[]> phonebook = new TreeMap();
+    private TreeMap<String,String[]> phonebook = new TreeMap();
 
     public void setPhonebook(String name, String address, String phonenumber){
         phonebook.put(phonenumber,new String[]{name, address});
+    }
+    public TreeMap<String, String[]> getPhonebook() {
+        return phonebook;
     }
     public void delete(String phonenumber){
         phonebook.remove(phonenumber);
@@ -20,7 +25,7 @@ public class Phonebook {
             BufferedWriter bw = new BufferedWriter(fw);
             for (String key: phonebook.keySet()) {
                 String[] s = phonebook.get(key);
-                bw.write(key+";"+s[0]+";"+s[1]);
+                bw.write(key+";"+s[0]+";"+s[1]+"\n");
             }
             bw.close();
         }

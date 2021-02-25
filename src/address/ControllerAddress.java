@@ -22,14 +22,24 @@ public class ControllerAddress {
         this.ph = ph;
     }
     public void change(){
-        ph.change(phone.getText(),address.getText(),name.getText(),index);
+        if (name.getText().equals("")||phone.getText().equals("")||address.getText().equals("")) {
+            System.out.println("Bitte füllen Sie alle Felder aus");
+        }
+        else {
+            ph.change(phone.getText(), address.getText(), name.getText(), index);
+        }
         //System.out.println(ph.getPhonebook().toString());
         update();
     }
     public void add(){
         if (isadd){
             if (!ph.getPhonebook().containsKey(phone.getText())){
-                ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+                if (name.getText().equals("")||phone.getText().equals("")||address.getText().equals("")) {
+                    System.out.println("Bitte füllen Sie alle Felder aus");
+                }
+                else {
+                    ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+                }
             }
             else {
                 System.out.println("Telefonnummer bereits vergeben.");

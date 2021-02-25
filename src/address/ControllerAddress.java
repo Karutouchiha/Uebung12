@@ -22,15 +22,26 @@ public class ControllerAddress {
     }
     public void change(){
         ph.change(phone.getText(),address.getText(),name.getText(),index);
-        System.out.println(ph.getPhonebook().toString());
+        //System.out.println(ph.getPhonebook().toString());
         update();
     }
     public void add(){
-        ph.setPhonebook(name.getText(),address.getText(),phone.getText());
+        if (!ph.getPhonebook().containsKey(phone.getText())){
+            ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+        }
+        else {
+            System.out.println("Telefonnumber bereits vergeben.");
+        }
+        update();
     }
     public void delete(){
-        ph.delete(keyl.toArray()[index].toString());
-        System.out.println(ph.getPhonebook().toString());
+        if (ph.getPhonebook().containsKey(phone.getText())){
+            ph.delete(keyl.toArray()[index].toString());
+        }
+        else {
+            System.out.println("Diese Telefonnummer ist nicht im Telefonbuch vorhanden.");
+        }
+        //System.out.println(ph.getPhonebook().toString());
         update();
     }
     public void move(MouseEvent event){

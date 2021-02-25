@@ -12,6 +12,7 @@ public class ControllerAddress {
     private Phonebook ph = new Phonebook();
     private ArrayList keyl;
     private int index=0;
+    private boolean isadd=false;
     @FXML private TextField phone;
     @FXML private TextField name;
     @FXML private TextField address;
@@ -26,13 +27,22 @@ public class ControllerAddress {
         update();
     }
     public void add(){
-        if (!ph.getPhonebook().containsKey(phone.getText())){
-            ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+        if (isadd){
+            if (!ph.getPhonebook().containsKey(phone.getText())){
+                ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+            }
+            else {
+                System.out.println("Telefonnummer bereits vergeben.");
+            }
+            update();
         }
         else {
-            System.out.println("Telefonnumber bereits vergeben.");
+            name.setText("");
+            phone.setText("");
+            address.setText("");
+            isadd=true;
         }
-        update();
+
     }
     public void delete(){
         if (ph.getPhonebook().containsKey(phone.getText())){

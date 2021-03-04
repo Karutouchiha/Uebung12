@@ -7,9 +7,21 @@ import java.util.TreeMap;
 
 public class Phonebook {
     private TreeMap<String,String[]> phonebook = new TreeMap();
+    int Index = 0;
 
+    public int getIndex() {
+        return Index;
+    }
+
+    public void setIndex(int index) {
+        Index = index;
+    }
     public void setPhonebook(String name, String address, String phonenumber){
-        phonebook.put(phonenumber,new String[]{name, address});
+        if (!phonebook.containsKey(phonenumber)) {
+            phonebook.put(phonenumber,new String[]{name, address});
+        } else {
+            System.out.println("Telefonnummer bereits vergeben.");
+        }
     }
     public TreeMap<String, String[]> getPhonebook() {
         return phonebook;
@@ -17,17 +29,41 @@ public class Phonebook {
     public void delete(String phonenumber){
         phonebook.remove(phonenumber);
     }
-    public void change(String key, String addess, String name ,int index){
-        if (phonebook.containsKey(key)){
-            delete(key);
+    public void move(String id){
+        if (id.equals("next")){
+            if (Index==phonebook.size()-1){
+                Index=0;
+            }
+            else {
+                Index++;
+            }
         }
         else {
-            ArrayList a = new ArrayList();
-            a.addAll(phonebook.keySet());
-            String s = a.get(index).toString();
-            delete(s);
+            if (Index==0){
+                Index=phonebook.size()-1;
+            }
+            else {
+                Index--;
+            }
         }
-        setPhonebook(name,addess,key);
+    }
+
+    public void change(String key, String addess, String name ,int index){
+        if (!phonebook.isEmpty()) {
+            if (phonebook.containsKey(key)) {
+                delete(key);
+            } else {
+                ArrayList a = new ArrayList();
+                a.addAll(phonebook.keySet());
+                String s = a.get(index).toString();
+                delete(s);
+            }
+            setPhonebook(name, addess, key);
+        }
+        else {
+            setPhonebook(name,addess,key);
+            System.out.println("Da kein Eintrag forhanden ist wurde der Eintrag hinzugefügt");
+        }
     }
     public void save(){
         try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){

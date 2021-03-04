@@ -1,22 +1,37 @@
 package address;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import main.ControllerMain;
 import other.Phonebook;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControllerAddress {
     private Phonebook ph = new Phonebook();
     private ArrayList keyl;
-    private int index=0;
-    private boolean isadd=false;
+    private int index=ph.getIndex();
+    private Stage stage;
     @FXML private TextField phone;
     @FXML private TextField name;
     @FXML private TextField address;
     @FXML private Text value;
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     public void setPh(Phonebook ph) {
         this.ph = ph;
@@ -36,24 +51,17 @@ public class ControllerAddress {
             System.out.println("Bitte füllen Sie alle Felder aus");
         }
         else {
-            if (isadd) {
-                if (!ph.getPhonebook().containsKey(phone.getText())) {
-                        ph.setPhonebook(name.getText(), address.getText(), phone.getText());
-                } else {
-                    System.out.println("Telefonnummer bereits vergeben.");
-                }
-                update();
-            }
+            ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+            update();
         }
-
     }
     public void delete(){
-        if (ph.getPhonebook().containsKey(phone.getText())){
+        if (!ph.getPhonebook().isEmpty()) {
             ph.delete(keyl.toArray()[index].toString());
         }
         else {
-            System.out.println("Diese Telefonnummer ist nicht im Telefonbuch vorhanden.");
-        }
+                System.out.println("Das Telefonbuch ist leer.");
+                }
         //System.out.println(ph.getPhonebook().toString());
         update();
     }
@@ -61,22 +69,7 @@ public class ControllerAddress {
         Object node = event.getSource();
         Polygon pol = (Polygon)node;
         String id = pol.getId();
-        if (id.equals("next")){
-            if (index==ph.getPhonebook().size()-1){
-                index=0;
-            }
-            else {
-                index++;
-            }
-        }
-        else {
-            if (index==0){
-                index=ph.getPhonebook().size()-1;
-            }
-            else {
-                index--;
-            }
-        }
+        ph.move(id);
         update();
     }
 
@@ -85,7 +78,7 @@ public class ControllerAddress {
             ArrayList al = new ArrayList();
             keyl=al;
             al.addAll(ph.getPhonebook().keySet());
-
+            this.index= ph.getIndex();
             String[] s =ph.getPhonebook().get(al.toArray()[index]);
             phone.setText(al.get(index).toString());
             name.setText(s[0]);
@@ -102,5 +95,25 @@ public class ControllerAddress {
                 index = 0;
             }
         }
+    }
+    public void changeScene(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/Mainscreen.fxml"));
+            Parent root = loader.load();
+            ControllerMain MC = loader.getController();
+            MC.setPh(this.ph);
+            MC.update();
+            Stage stage = new Stage();
+            stage.setTitle("Phonebook");
+            stage.getIcons().add(new Image("https://s2.qwant.com/thumbr/0x380/c/e/17fc1f9bbfe37c9fb092530587faeb7b246672b67d6cf2b8be8a02d49f8e36/Address-Book-icon.png?u=http%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fartua%2Fmac%2F512%2FAddress-Book-icon.png&q=0&b=1&p=0&a=1"));
+            stage.setScene(new Scene(root));
+            MC.setStage(stage);
+            stage.show();
+            this.stage.close();
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        //System.out.println("Change");
     }
 }

@@ -22,47 +22,44 @@ import java.util.ResourceBundle;
 
 public class ControllerMain implements Initializable {
     private Phonebook ph = new Phonebook();
-    private int index=0;
+    private int index=ph.getIndex();
+    private Stage stage;
     @FXML private TextField phone;
     @FXML private TextField name;
     @FXML private TextField address;
     @FXML private Text value;
+    public Phonebook getPh() {
+        return ph;
+    }
 
+    public void setPh(Phonebook ph) {
+        this.ph = ph;
+    }
+    public Stage getStage() {
+        return stage;
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     public void save(){
         ph.save();
     }
     public void load(){
         ph.load();
         update();
-        index=0;
     }
     public void move(MouseEvent event){
         Object node = event.getSource();
         Polygon pol = (Polygon)node;
         String id = pol.getId();
-        if (id.equals("next")){
-            if (index==ph.getPhonebook().size()-1){
-                index=0;
-            }
-            else {
-                index++;
-            }
-        }
-        else {
-            if (index==0){
-                index=ph.getPhonebook().size()-1;
-            }
-            else {
-                index--;
-            }
-        }
+       ph.move(id);
         update();
     }
     public void update(){
         try {
         ArrayList al = new ArrayList();
         al.addAll(ph.getPhonebook().keySet());
-
+        this.index= ph.getIndex();
         String[] s =ph.getPhonebook().get(al.toArray()[index]);
         phone.setText(al.get(index).toString());
         name.setText(s[0]);
@@ -75,7 +72,7 @@ public class ControllerMain implements Initializable {
             name.setText("");
             address.setText("");
             value.setText("0/0");
-            index=0;
+            ph.setIndex(0);
         }
     }
     public void changeScene(){
@@ -89,8 +86,9 @@ public class ControllerMain implements Initializable {
             stage.setTitle("Phonebook edit");
             stage.getIcons().add(new Image("https://s2.qwant.com/thumbr/0x380/c/e/17fc1f9bbfe37c9fb092530587faeb7b246672b67d6cf2b8be8a02d49f8e36/Address-Book-icon.png?u=http%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fartua%2Fmac%2F512%2FAddress-Book-icon.png&q=0&b=1&p=0&a=1"));
             stage.setScene(new Scene(root));
+            AC.setStage(stage);
             stage.show();
-
+            this.stage.close();
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());

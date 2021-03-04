@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 import main.ControllerMain;
 
 public class Main extends Application {
-
+    private ControllerMain CM;
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/Mainscreen.fxml"));
         Parent root = loader.load();
 
-        ControllerMain CM=loader.getController();
+        CM=loader.getController();
         CM.setStage(primaryStage);
 
         primaryStage.setTitle("Phonebook");
@@ -23,7 +23,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-
+    @Override
+    public void stop(){
+        CM.save();
+    }
 
     public static void main(String[] args) {
         launch(args);

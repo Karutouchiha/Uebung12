@@ -103,12 +103,38 @@ public class Phonebook {
             }
         return true;
     }
+    public String[] separateString(String a){
+        char[] c= " +".toCharArray();
+        int index =0;
+        boolean first = true;
+        String[] strings = new String[3];
+        for( int i = 0; i<a.length(); i++) {
+            if (!Character.isDigit(a.charAt(i))) {
+                if (a.charAt(i) == c[0]) {
+                    index++;
+                    first=true;
+                }
+            }
+            else {
+                if (first){
+                    strings[index] = String.valueOf(a.charAt(i));
+                    first=false;
+                }
+                else {
+                    strings[index] = strings[index] + a.charAt(i);
+                }
+            }
+
+        }
+        return strings;
+    }
     public void save(){
         try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){
             BufferedWriter bw = new BufferedWriter(fw);
             for (String key: phonebook.keySet()) {
                 String[] s = phonebook.get(key);
-                bw.write(key+";"+s[0]+";"+s[1]+";\n;");
+                String[] keys = separateString(key);
+                bw.write(keys[0] + ";" + keys[1] + ";" + keys[2] + ";" + s[0] + ";" + s[1] + ";\n;");
             }
             bw.close();
             System.out.println("Successfully saved");
@@ -134,6 +160,7 @@ public class Phonebook {
         catch (IOException ex){
             System.out.println(ex.getMessage());
         }
+
         for (int i=0;i<arrayList.size();i++) {
             String[] strings = arrayList.get(i);
             boolean nnull = false;

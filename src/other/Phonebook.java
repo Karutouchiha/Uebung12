@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Phonebook {
     private LinkedHashMap<String,String[]> phonebook = new LinkedHashMap<>();
-    int Index = 0;
+    private int Index = 0;
+    private String file ="Phonebook.csv";
 
     public void sort(){
         TreeSet<String> a = new TreeSet<>();
@@ -129,7 +130,7 @@ public class Phonebook {
         return strings;
     }
     public void save(){
-        try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){
+        try(FileWriter fw= new FileWriter(new File(file))){
             BufferedWriter bw = new BufferedWriter(fw);
             for (String key: phonebook.keySet()) {
                 String[] s = phonebook.get(key);
@@ -146,7 +147,7 @@ public class Phonebook {
     public void load(){
         ArrayList<String[]> arrayList = new ArrayList();
         try {
-            Scanner scanner = new Scanner(new File("Phonebook.csv"));
+            Scanner scanner = new Scanner(new File(file));
             scanner.useDelimiter(";");
             do{
                 String[] s = new String[4];

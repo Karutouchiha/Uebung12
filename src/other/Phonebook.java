@@ -66,7 +66,6 @@ public class Phonebook {
     public void change(String key, String addess, String name ,int index){
         if (!phonebook.isEmpty()) {
             if (testString(key)) {
-                setPhonebook(name, addess, key);
                 if (phonebook.containsKey(key)) {
                     delete(key);
                 } else {
@@ -75,11 +74,14 @@ public class Phonebook {
                     String s = a.get(index).toString();
                     delete(s);
                 }
+                setPhonebook(name, addess, key);
             }
         }
         else {
-            setPhonebook(name,addess,key);
-            System.out.println("Da kein Eintrag vorhanden ist wurde der Eintrag hinzugefügt");
+            if (testString(key)) {
+                System.out.println("Da kein Eintrag vorhanden ist wurde der Eintrag hinzugefügt");
+                setPhonebook(name,addess,key);
+            }
         }
         sort();
     }

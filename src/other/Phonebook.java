@@ -1,14 +1,28 @@
 package other;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Phonebook {
-    private TreeMap<String,String[]> phonebook = new TreeMap();
+    private LinkedHashMap<String,String[]> phonebook = new LinkedHashMap<>();
     int Index = 0;
 
+    public void sort(){
+        TreeSet<String> a = new TreeSet<>();
+        LinkedHashMap<String,String[]> ph = new LinkedHashMap<>(phonebook);
+        for (String key: phonebook.keySet()){
+            a.add(phonebook.get(key)[0]);
+        }
+        phonebook.clear();
+        for (String name: a){
+            for (String key: ph.keySet()) {
+                if (name.equals(ph.get(key)[0])){
+                    phonebook.put(key,ph.get(key));
+                    break;
+                }
+            }
+        }
+    }
     public int getIndex() {
         return Index;
     }
@@ -16,14 +30,24 @@ public class Phonebook {
     public void setIndex(int index) {
         Index = index;
     }
-    public void setPhonebook(String name, String address, String phonenumber){
-        if (!phonebook.containsKey(phonenumber)) {
-            phonebook.put(phonenumber,new String[]{name, address});
-        } else {
-            System.out.println("Telefonnummer bereits vergeben.");
+    public void setPhonebook(String name, String address, String phonenumber) {
+        if (!(phonenumber.length()<14)) {
+            if (testStringDig(phonenumber)) {
+                if (!phonebook.containsKey(phonenumber)) {
+                    phonebook.put(phonenumber, new String[]{name, address});
+                    sort();
+                } else {
+                    System.out.println("Telefonnummer bereits vergeben.");
+                }
+            } else {
+                System.out.println("Die Telefonnummer enthält nicht zugelassene Zeichen");
+            }
+        }
+        else {
+            System.out.println("Die Telefonnummer ist zu kurz. Bitte geben Sie Leerzeichen und Vorwahl an.");
         }
     }
-    public TreeMap<String, String[]> getPhonebook() {
+    public LinkedHashMap<String, String[]> getPhonebook() {
         return phonebook;
     }
     public void delete(String phonenumber){
@@ -46,6 +70,7 @@ public class Phonebook {
                 Index--;
             }
         }
+        sort();
     }
 
     public void change(String key, String addess, String name ,int index){
@@ -64,6 +89,19 @@ public class Phonebook {
             setPhonebook(name,addess,key);
             System.out.println("Da kein Eintrag forhanden ist wurde der Eintrag hinzugefügt");
         }
+        sort();
+    }
+    public boolean testStringDig (String a){
+        char[] c= " +".toCharArray();
+        for( int i = 0; i<a.length(); i++ )
+            if(!Character.isDigit(a.charAt( i ))){
+                if (a.charAt(i)==c[0]||a.charAt(i)==c[1]) {
+                }
+                else {
+                    return false;
+                }
+            }
+        return true;
     }
     public void save(){
         try(FileWriter fw= new FileWriter(new File("Phonebook.csv"))){

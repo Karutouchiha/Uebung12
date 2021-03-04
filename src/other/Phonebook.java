@@ -56,14 +56,25 @@ public class Phonebook {
                 arrayList.add(s);
             }while (scanner.hasNext());
             scanner.close();
-            System.out.println("Successfully loaded");
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());
         }
         for (int i=0;i<arrayList.size();i++) {
             String[] strings = arrayList.get(i);
-            setPhonebook(strings[1],strings[2],strings[0]);
+            boolean nnull = false;
+            for (String s : strings) {
+                if (s == null) {
+                    nnull = true;
+                }
+            }
+            if (!nnull) {
+                setPhonebook(strings[1], strings[2], strings[0]);
+                System.out.println("Successfully loaded");
+            }
+            else {
+                System.out.println("Data loading failed");
+            }
         }
     }
 }

@@ -32,25 +32,18 @@ public class ControllerAddress {
         update();
     }
     public void add(){
-        if (isadd){
-            if (!ph.getPhonebook().containsKey(phone.getText())){
-                if (name.getText().equals("")||phone.getText().equals("")||address.getText().equals("")) {
-                    System.out.println("Bitte füllen Sie alle Felder aus");
-                }
-                else {
-                    ph.setPhonebook(name.getText(), address.getText(), phone.getText());
-                }
-            }
-            else {
-                System.out.println("Telefonnummer bereits vergeben.");
-            }
-            update();
+        if (name.getText().equals("")||phone.getText().equals("")||address.getText().equals("")) {
+            System.out.println("Bitte füllen Sie alle Felder aus");
         }
         else {
-            name.setText("");
-            phone.setText("");
-            address.setText("");
-            isadd=true;
+            if (isadd) {
+                if (!ph.getPhonebook().containsKey(phone.getText())) {
+                        ph.setPhonebook(name.getText(), address.getText(), phone.getText());
+                } else {
+                    System.out.println("Telefonnummer bereits vergeben.");
+                }
+                update();
+            }
         }
 
     }
@@ -100,12 +93,14 @@ public class ControllerAddress {
             value.setText((index+1)+"/"+al.size());
         }
         catch (IndexOutOfBoundsException ex){
-            System.out.println("Es wurde kein Datensatz gefunden");
-            phone.setText("");
-            name.setText("");
-            address.setText("");
-            value.setText("0/0");
-            index=0;
+            if (ph.getPhonebook().isEmpty()){
+                System.out.println("");
+                phone.setText("");
+                name.setText("");
+                address.setText("");
+                value.setText("0/0");
+                index = 0;
+            }
         }
     }
 }

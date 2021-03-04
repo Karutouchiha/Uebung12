@@ -32,20 +32,9 @@ public class Phonebook {
         Index = index;
     }
     public void setPhonebook(String name, String address, String phonenumber) {
-        if (!(phonenumber.length()<14)) {
-            if (testStringDig(phonenumber)) {
-                if (!phonebook.containsKey(phonenumber)) {
-                    phonebook.put(phonenumber, new String[]{name, address});
-                    sort();
-                } else {
-                    System.out.println("Telefonnummer bereits vergeben.");
-                }
-            } else {
-                System.out.println("Die Telefonnummer enthält nicht zugelassene Zeichen");
-            }
-        }
-        else {
-            System.out.println("Die Telefonnummer ist zu kurz. Bitte geben Sie Leerzeichen und Vorwahl an.");
+        if (testString(phonenumber)) {
+            phonebook.put(phonenumber, new String[]{name, address});
+            sort();
         }
     }
     public LinkedHashMap<String, String[]> getPhonebook() {
@@ -76,33 +65,53 @@ public class Phonebook {
 
     public void change(String key, String addess, String name ,int index){
         if (!phonebook.isEmpty()) {
-            if (phonebook.containsKey(key)) {
-                delete(key);
-            } else {
-                ArrayList a = new ArrayList();
-                a.addAll(phonebook.keySet());
-                String s = a.get(index).toString();
-                delete(s);
+            if (testString(key)) {
+                setPhonebook(name, addess, key);
+                if (phonebook.containsKey(key)) {
+                    delete(key);
+                } else {
+                    ArrayList a = new ArrayList();
+                    a.addAll(phonebook.keySet());
+                    String s = a.get(index).toString();
+                    delete(s);
+                }
             }
-            setPhonebook(name, addess, key);
         }
         else {
             setPhonebook(name,addess,key);
-            System.out.println("Da kein Eintrag forhanden ist wurde der Eintrag hinzugefügt");
+            System.out.println("Da kein Eintrag vorhanden ist wurde der Eintrag hinzugefügt");
         }
         sort();
     }
-    public boolean testStringDig (String a){
-        char[] c= " +".toCharArray();
-        for( int i = 0; i<a.length(); i++ )
-            if(!Character.isDigit(a.charAt( i ))){
-                if (a.charAt(i)==c[0]||a.charAt(i)==c[1]) {
+    public boolean testString (String a){
+        if (!(a.length()<14)) {
+            boolean isdig = true;
+            int spacenum =0;
+            char[] c = " +".toCharArray();
+            for (int i = 0; i < a.length(); i++)
+                if (!Character.isDigit(a.charAt(i))) {
+                    if (a.charAt(i) == c[0]) {
+                        spacenum++;
+                    }
+                    else if (a.charAt(i) == c[1]){
+                    }else {
+                        isdig=false;
+                    }
                 }
-                else {
-                    return false;
+            if (spacenum == 2 && isdig){
+                if (!phonebook.containsKey(a)) {
+                    return true;
+                } else {
+                    System.out.println("Telefonnummer bereits vergeben.");
                 }
+            } else {
+                System.out.println("Telefonnummer muss 2 Lehrzeichen enthalten bzw. darf keine Ziffern enthalten");
             }
-        return true;
+        }
+        else {
+            System.out.println("Die Telefonnummer ist zu kurz. Bitte geben Sie Leerzeichen und Vorwahl an.");
+        }
+        return false;
     }
     public String[] separateString(String a){
         char[] c= " +".toCharArray();
@@ -150,8 +159,8 @@ public class Phonebook {
             Scanner scanner = new Scanner(new File(file));
             scanner.useDelimiter(";");
             do{
-                String[] s = new String[4];
-                for (int i = 0; i<4&&scanner.hasNext(); i++) {
+                String[] s = new String[6];
+                for (int i = 0; i<6&&scanner.hasNext(); i++) {
                     s[i] = (scanner.next());
                 }
                 arrayList.add(s);
@@ -170,8 +179,9 @@ public class Phonebook {
                     nnull = true;
                 }
             }
+            String key = "+"+strings[0]+" "+strings[1]+" "+strings[2];
             if (!nnull) {
-                setPhonebook(strings[1], strings[2], strings[0]);
+                setPhonebook(strings[3], strings[4],key);
                 System.out.println("Successfully loaded");
             }
             else {
